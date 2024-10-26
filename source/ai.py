@@ -1,29 +1,20 @@
 import base64
-import os
 from io import BytesIO
 
-import unstructured_pytesseract.pytesseract
 from PIL import Image
-from langchain_community.document_loaders.image import UnstructuredImageLoader
 
 from langchain_ollama import ChatOllama
 
 from langchain_core.messages import HumanMessage
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 
-
-def loader_test_unstructured():
-    unstructured_pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-    loader = UnstructuredImageLoader("resources/figure-65.png")
-
-    data = loader.load()
-    return data[0]
-
+# 192.168.0.104:11434
 def convert_image_ollama(image):
     ollama = ChatOllama(
         model="llava",
         temperature=0,
         format="json",
+        base_url="http://192.168.0.104:11434",
     )
 
     # Create the chain with the prompt function, model, and output parser
