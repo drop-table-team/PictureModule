@@ -8,13 +8,16 @@ from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import JsonOutputParser
 
-# 192.168.0.104:11434
+from api.config import Settings, get_settings
+
 def convert_image_ollama(image):
+    Settings = get_settings()
+
     ollama = ChatOllama(
-        model="llava",
+        model=Settings.OLLAMA_MODEL,
         temperature=0,
         format="json",
-        base_url="http://192.168.0.104:11434",
+        base_url=Settings.OLLAMA_BASE_URL,
     )
 
     # Create the chain with the prompt function, model, and output parser
