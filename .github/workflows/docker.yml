@@ -29,4 +29,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/drop-table-team/pictureModule:latest
+          tags: ghcr.io/drop-table-team/picture_module:latest
