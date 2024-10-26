@@ -5,6 +5,8 @@ from PIL import Image
 
 from langchain_ollama import ChatOllama
 
+
+
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import JsonOutputParser
 
