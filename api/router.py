@@ -1,22 +1,15 @@
 import json
 import os
-from dataclasses import fields
 
 import aiohttp
-from fastapi import APIRouter, UploadFile, Depends, HTTPException
-from fastapi.openapi.models import APIKey
-from requests_toolbelt import MultipartEncoder
+from fastapi import APIRouter, UploadFile, HTTPException
 
 from source.ai import convert_image_ollama
-
-import api.auth as auth
-import requests
-
 BACKEND_BASE_URL = os.getenv("BACKEND_BASE_URL")
 router = APIRouter()
 
 @router.post("/input")
-async def convert_image(file: UploadFile, api_key: APIKey = Depends(auth.get_api_key)):
+async def convert_image(file: UploadFile):
     output = convert_image_ollama(file.file)
 
     output["short"] = output.pop("summary")
