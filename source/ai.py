@@ -1,4 +1,5 @@
 import base64
+import os
 from io import BytesIO
 
 from PIL import Image
@@ -8,16 +9,14 @@ from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import JsonOutputParser
 
-from api.config import Settings, get_settings
 
 def convert_image_ollama(image):
-    Settings = get_settings()
 
     ollama = ChatOllama(
-        model=Settings.OLLAMA_MODEL,
+        model=os.getenv("OLLAMA_MODEL"),
         temperature=0,
         format="json",
-        base_url=Settings.OLLAMA_BASE_URL,
+        base_url=os.getenv("OLLAMA_BASE_URL"),
     )
 
     # Create the chain with the prompt function, model, and output parser
@@ -49,7 +48,6 @@ def convert_to_base64(pil_image):
 
 # Function to create the prompt with text and image
 def prompt_func(data):
-    text = data["text"]
     image = data["image"]
 
     image_part = {
@@ -59,7 +57,7 @@ def prompt_func(data):
 
     content_parts = []
 
-    text_part = {"type": "text", "text": "You are a helpful assistant that collects information from pictures. Return answers to the following statements: Give the picture a title. Summarise the picture. Describe the picture. Repeat the text in the picture if there is any., Give tags corresponding to the image."
+    text_part = {"type": "text", "text": "You are a helpful assistant that collects information from pictures. Return answers to the following statements: Give the picture a title. Give tags corresponding to the image. Give a short summary of the picture. Describe the picture in detail."
     }
 
 
