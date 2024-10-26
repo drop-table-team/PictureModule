@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     API_KEY: str
     OLLAMA_BASE_URL: str
     OLLAMA_MODEL: str
+    BACKEND_BASE_URL: str
 
     class Config:
         env_file = ".env"
