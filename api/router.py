@@ -23,6 +23,7 @@ async def convert_image(file: UploadFile):
         form.add_field(
             "json", json.dumps(output), content_type="application/json"
         )
+        await file.seek(0)
         form.add_field(
             "file",
             await file.read(),
