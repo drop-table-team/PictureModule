@@ -5,7 +5,7 @@ Provides a Module to convert pictures to text.
 - A picture (preferred png or jpg) through the api endpoint ("/input")
 
 ## Output:
-- Backend POST request with the text of the picture
+- Backend POST request with the extracted text of the picture
     - Extracted infos are: title, tags, short summary, transcription
     - Also sends original file to the backend
 - Endpoint returns only extracted text if successful
